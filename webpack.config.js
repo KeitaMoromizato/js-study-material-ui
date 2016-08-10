@@ -5,7 +5,7 @@ module.exports = {
   },
   output: {
     path: './out',
-    filename: 'bundle.js'
+    filename: '[name].js'
   },
   devServer: {
     contentBase: 'out',
