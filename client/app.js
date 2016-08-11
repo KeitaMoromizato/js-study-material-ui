@@ -19,6 +19,7 @@ class App extends Component {
     super(props);
 
     this.state = {
+      selectedItem: {},
       items: [
         {
           name: 'hoge',
@@ -26,7 +27,7 @@ class App extends Component {
         },
         {
           name: 'aaa',
-          contnets: 'aaaa'
+          contents: 'aaaa'
         }
       ]
     };
@@ -38,13 +39,17 @@ class App extends Component {
         key={item.name}
         primaryText={item.name}
         onTouchTap={() => {
-          console.log(item);
+          console.log("changed");
+          this.setState({
+            selectedItem: item
+          });
         }}
         ></ListItem>
     );
   }
 
   render() {
+
     return (
       <MuiThemeProvider>
         <div id="page">
@@ -53,7 +58,7 @@ class App extends Component {
             { this.state.items.map(item => this.renderListItem(item) ) }
           </List>
 
-          <Detail></Detail>
+          <Detail {...this.state.selectedItem}></Detail>
         </div>
       </MuiThemeProvider>
     )
