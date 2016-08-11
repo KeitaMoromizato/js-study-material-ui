@@ -7,6 +7,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import { List, ListItem} from 'material-ui/List';
 
+import Detail from './detail';
+
 import './app.styl';
 
 injectTapEventPlugin();
@@ -46,10 +48,12 @@ class App extends Component {
     return (
       <MuiThemeProvider>
         <div id="page">
-        <AppBar title={"Material UI Test"} ></AppBar>
-          <List>
+        <AppBar title="Material UI Test" ></AppBar>
+          <List className="list">
             { this.state.items.map(item => this.renderListItem(item) ) }
           </List>
+
+          <Detail></Detail>
         </div>
       </MuiThemeProvider>
     )
