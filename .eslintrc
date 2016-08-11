@@ -12,9 +12,11 @@
     "es6": true
   },
   "plugins": [
-    "react"
+    "react",
+    "class-property"
   ],
   "rules": {
-    "react/display-name": 1
+    "react/display-name": 1,
+    "class-property/rule-name": 2
   }
 }
