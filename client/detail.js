@@ -4,7 +4,6 @@ export default class Detail extends Component {
 
   constructor(props) {
     super(props);
-    console.log("create child", props);
   }
 
   render() {

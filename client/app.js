@@ -6,8 +6,13 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import { List, ListItem} from 'material-ui/List';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 
 import Detail from './detail';
+import AddDialog from './addDialog';
+
+import Items from './items.json';
 
 import './app.styl';
 
@@ -20,23 +25,21 @@ class App extends Component {
 
     this.state = {
       selectedItem: {},
-      items: [
-        {
-          name: 'hoge',
-          contents: 'huga'
-        },
-        {
-          name: 'aaa',
-          contents: 'aaaa'
-        }
-      ]
+      items: Items,
+      openDialog: false
     };
   }
 
-  renderListItem(item) {
+  onClickAdd() {
+    this.setState({
+      openDialog: true
+    });
+  }
+
+  renderListItem(item, key) {
     return (
       <ListItem
-        key={item.name}
+        key={key}
         primaryText={item.name}
         onTouchTap={() => {
           console.log("changed");
@@ -53,12 +56,23 @@ class App extends Component {
     return (
       <MuiThemeProvider>
         <div id="page">
-        <AppBar title="Material UI Test" ></AppBar>
+          <AppBar title="Material UI Test" ></AppBar>
           <List className="list">
-            { this.state.items.map(item => this.renderListItem(item) ) }
+            { this.state.items.map((item, i) => this.renderListItem(item, i) ) }
           </List>
 
           <Detail {...this.state.selectedItem}></Detail>
+
+          <FloatingActionButton className="actionButton" secondary={true} onTouchTap={ () => this.onClickAdd()}>
+            <ContentAdd />
+          </FloatingActionButton>
+
+          <AddDialog
+            open={this.state.openDialog}
+            onClose={() => this.setState({ openDialog: false })}
+            onSubmit={(item) => this.setState({ items: [...this.state.items, item], openDialog: false})}
+            />
+
         </div>
       </MuiThemeProvider>
     )

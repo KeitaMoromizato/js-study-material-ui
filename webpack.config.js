@@ -29,7 +29,11 @@ module.exports = {
       {
         test: /\.html$/,
         loader: 'file?name=[path][name].[ext]'
-      }
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
+      }      
     ]
   },
   resolve: {
